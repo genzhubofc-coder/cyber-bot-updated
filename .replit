@@ -3,3 +3,7 @@ channel = "stable-25_05"
 
 [agent]
 expertMode = true
+
+[deployment]
+deploymentTarget = "vm"
+run = ["node", "Ullash.js"]
