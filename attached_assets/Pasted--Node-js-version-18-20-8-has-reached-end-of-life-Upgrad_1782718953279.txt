@@ -1,0 +1,43 @@
+==> Node.js version 18.20.8 has reached end-of-life.
+==> Upgrade to a maintained version to receive important security updates.
+==> Information on maintained Node.js versions: https://nodejs.org/en/about/previous-releases
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Installing Node.js version 18.20.8...
+==> Running build command 'npm install'...
+up to date, audited 1228 packages in 8s
+146 packages are looking for funding
+  run `npm fund` for details
+100 vulnerabilities (15 low, 28 moderate, 52 high, 5 critical)
+To address issues that do not require attention, run:
+  npm audit fix
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+Some issues need review, and may require choosing
+a different dependency.
+Run `npm audit` for details.
+==> Uploading build...
+==> Uploaded in 4.0s. Compression took 4.3s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'node Ullash.js'
+[INTERCEPTOR] ✅ Suspended GitHub URL interceptor active
+]2;CYBER GOAT BOT V2-MODIFY BY MAHBUB ULLASH\ START LOGGING IN 
+13:41:08 29/06/2026  LOGIN FACEBOOK: Login in progress
+- Login with cookie array
+🔍 Checking for cyber-bot-fca updates...
+✅ cyber-bot-fca is up to date (v1.0.3)
+Found fb_dtsg!
+13:41:14 29/06/2026  LOGIN FACEBOOK: Successful login
+ BOT INFO 
+13:41:14 29/06/2026  NODE VERSION: v18.20.8
+13:41:14 29/06/2026  PROJECT VERSION: 2.1.2
+13:41:15 29/06/2026  BOT ID: 61591091594786 - null
+13:41:15 29/06/2026  PREFIX: .
+13:41:15 29/06/2026  LANGUAGE: en
+13:41:15 29/06/2026  BOT NICK NAME: ─꯭─⃝‌‌𝐒𝐚𝐤𝐢𝐛 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭💖
+13:41:15 29/06/2026  GBAN: CYBERBot API is unreachable or disabled. Contact CYBERBot owner for assistance.
+==> Application exited early
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+==> Running 'node Ullash.js'
+[INTERCEPTOR] ✅ Suspended GitHub URL interceptor active
