@@ -1,0 +1,55 @@
+==> Downloading cache...
+==> Cloning from https://github.com/genzhubofc-coder/cyber-bot-updated
+==> Checking out commit 5cb2e825c2e433969401798f4afa3707e6117f7a in branch main
+==> Downloaded 117MB in 2s. Extraction took 6s.
+==> Requesting Node.js version 18.x
+==> Using Node.js version 18.20.8 via /opt/render/project/src/package.json
+==> Node.js version 18.20.8 has reached end-of-life.
+==> Upgrade to a maintained version to receive important security updates.
+==> Information on maintained Node.js versions: https://nodejs.org/en/about/previous-releases
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Installing Node.js version 18.20.8...
+==> Running build command 'npm install'...
+up to date, audited 1228 packages in 11s
+146 packages are looking for funding
+  run `npm fund` for details
+100 vulnerabilities (15 low, 28 moderate, 52 high, 5 critical)
+To address issues that do not require attention, run:
+  npm audit fix
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+Some issues need review, and may require choosing
+a different dependency.
+Run `npm audit` for details.
+==> Uploading build...
+==> Uploaded in 3.6s. Compression took 4.9s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'node Ullash.js'
+[INTERCEPTOR] ✅ Suspended GitHub URL interceptor active
+]2;CYBER GOAT BOT V2-MODIFY BY MAHBUB ULLASH\ START LOGGING IN 
+Error: No valid axios adapter found
+    at interceptedAdapter (/opt/render/project/src/interceptor.js:92:15)
+    at Axios.dispatchRequest (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:4571:10)
+    at Axios._request (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:4869:33)
+    at Axios.request (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:4726:25)
+    at Axios.<computed> [as get] (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:4895:17)
+    at Function.wrap [as get] (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:40:15)
+    at ⵂⵐⵊⵊ (/opt/render/project/src/bot/login/login.js:5:111018)
+    at Object.<anonymous> (/opt/render/project/src/bot/login/login.js:5:151434)
+    at Module._compile (node:internal/modules/cjs/loader:1364:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+    at Module.load (node:internal/modules/cjs/loader:1203:32)
+    at Module._load (node:internal/modules/cjs/loader:1019:12)
+    at Module.require (node:internal/modules/cjs/loader:1231:19)
+    at require (node:internal/modules/helpers:177:18)
+    at /opt/render/project/src/Cyber.js:5:69351
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at Axios.request (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:4731:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ⵂⵐⵊⵊ (/opt/render/project/src/bot/login/login.js:5:110992)
+🔍 Checking for cyber-bot-fca updates...
+❌ Failed to check for cyber-bot-fca updates: No valid axios adapter found
+==> No open ports detected, continuing to scan...
+==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
