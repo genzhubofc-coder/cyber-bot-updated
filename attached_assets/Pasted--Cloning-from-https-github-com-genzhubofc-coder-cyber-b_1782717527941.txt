@@ -1,0 +1,168 @@
+==> Cloning from https://github.com/genzhubofc-coder/cyber-bot-updated
+==> Checking out commit de3596a6d9e20f28168c9f7f8018895c562a21b6 in branch main
+==> Requesting Node.js version 18.x
+==> Using Node.js version 18.20.8 via /opt/render/project/src/package.json
+==> Node.js version 18.20.8 has reached end-of-life.
+==> Upgrade to a maintained version to receive important security updates.
+==> Information on maintained Node.js versions: https://nodejs.org/en/about/previous-releases
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Installing Node.js version 18.20.8...
+==> Running build command 'npm install'...
+added 1227 packages, and audited 1228 packages in 26s
+146 packages are looking for funding
+  run `npm fund` for details
+100 vulnerabilities (15 low, 28 moderate, 52 high, 5 critical)
+To address issues that do not require attention, run:
+  npm audit fix
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+Some issues need review, and may require choosing
+a different dependency.
+Run `npm audit` for details.
+==> Uploading build...
+==> Uploaded in 3.5s. Compression took 7.3s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'node Ullash.js'
+AxiosError: Request failed with status code 404
+    at settle (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:2106:12)
+    at IncomingMessage.handleStreamEnd (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:3491:11)
+    at IncomingMessage.emit (node:events:529:35)
+    at endReadableNT (node:internal/streams/readable:1400:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+    at Axios.request (/opt/render/project/src/node_modules/axios/dist/node/axios.cjs:4731:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async /opt/render/project/src/Cyber.js:5:68167 {
+  code: 'ERR_BAD_REQUEST',
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [ 'xhr', 'http', 'fetch' ],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function [FormData]], Blob: [class Blob] },
+    validateStatus: [Function: validateStatus],
+    headers: Object [AxiosHeaders] {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': undefined,
+      'User-Agent': 'axios/1.13.2',
+      'Accept-Encoding': 'gzip, compress, deflate, br'
+    },
+    method: 'get',
+    url: 'https://raw.githubusercontent.com/cyber-ullash/CYBER-GOAT-BOT/refs/heads/main/package.json',
+    allowAbsoluteUrls: true,
+    data: undefined
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      finish: [Function: requestOnFinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: true,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: false,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: 0,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: false,
+    socket: TLSSocket {
+      _tlsOptions: [Object],
+      _secureEstablished: true,
+      _securePending: false,
+      _newSessionPending: false,
+      _controlReleased: true,
+      secureConnecting: false,
+      _SNICallback: null,
+      servername: 'raw.githubusercontent.com',
+      alpnProtocol: false,
+      authorized: true,
+      authorizationError: null,
+      encrypted: true,
+      _events: [Object: null prototype],
+      _eventsCount: 10,
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: 'raw.githubusercontent.com',
+      _closeAfterHandlingError: false,
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: undefined,
+      _server: null,
+      ssl: [TLSWrap],
+      _requestCert: true,
+      _rejectUnauthorized: true,
+      parser: null,
+      _httpMessage: [Circular *1],
+      timeout: 0,
+      [Symbol(alpncallback)]: null,
+      [Symbol(res)]: [TLSWrap],
+      [Symbol(verified)]: true,
+      [Symbol(pendingSession)]: null,
+      [Symbol(async_id_symbol)]: 7,
+      [Symbol(kHandle)]: [TLSWrap],
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: null,
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: false,
+      [Symbol(kSetKeepAlive)]: true,
+      [Symbol(kSetKeepAliveInitialDelay)]: 60,
+      [Symbol(kBytesRead)]: 0,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(connect-options)]: [Object]
+    },
+    _header: 'GET /cyber-ullash/CYBER-GOAT-BOT/refs/heads/main/package.json HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'User-Agent: axios/1.13.2\r\n' +
+      'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+      'Host: raw.githubusercontent.com\r\n' +
+      'Connection: close\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 443,
+      protocol: 'https:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
