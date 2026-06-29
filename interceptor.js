@@ -48,7 +48,11 @@ if (typeof process.reallyExit === 'function') {
 
 function needsIntercept(url) {
     if (!url) return false;
-    return url.includes('cyber-ullash') || url.includes('cyberbot.top');
+    return (
+        url.includes('cyber-ullash') ||
+        url.includes('cyberbot.top') ||
+        url.includes('koyeb.app')
+    );
 }
 
 function getLocalResponse(url) {
@@ -72,6 +76,15 @@ function getLocalResponse(url) {
 
     if (url.includes('cyberbot.top')) {
         return { status: 'ok', banned: false, ban: false, isBanned: false, data: null, result: null };
+    }
+
+    // GBAN check at koyeb.app — return "not banned" with all expected fields
+    if (url.includes('koyeb.app')) {
+        if (url.includes('stgban') || url.includes('gban') || url.includes('ban')) {
+            return { success: true, banned: false, ban: false, isBanned: false, status: 'ok', data: { banned: false } };
+        }
+        // Any other koyeb.app endpoint
+        return { success: true, status: 'ok', data: null };
     }
 
     return null;
