@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: cyber-goat-bot
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: node Ullash.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: false

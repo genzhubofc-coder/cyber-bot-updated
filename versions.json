@@ -1,0 +1,31 @@
+{
+  "version": "2.1.1",
+  "files": {
+    "bot/handler/handlerEvents.js": "Mentions system upgraded and fixed",
+    "bot/login/botacc.js": "Improved bot ID/login stability",
+    "database/controller/usersData.js": "Economy data moved to API system",
+
+    "scripts/cmds/album.js": "updated",
+    "scripts/cmds/alldl.js": "updated",
+    "scripts/cmds/balance.js": "updated",
+    "scripts/cmds/dice.js": "updated",
+    "scripts/cmds/edit.js": "updated",
+    "scripts/cmds/hack.js": "updated",
+    "scripts/cmds/hot.js": "updated",
+    "scripts/cmds/hug.js": "updated",
+    "scripts/cmds/islamic.js": "updated",
+    "scripts/cmds/kiss.js": "updated",
+    "scripts/cmds/slot.js": "updated",
+    "scripts/cmds/spy.js": "updated",
+    "scripts/cmds/top.js": "updated",
+    "scripts/cmds/whitelistthread.js": "updated"
+  },
+  "note": "Major commands refreshed from shaon folder. Mentions system fixed and improved. Bot login stability enhanced. Economy system now API-based. Multiple fun and utility commands updated for better performance and bug fixes."
+},
+{
+  "version": "2.1.2",
+  "files": {
+    "database/controller/usersData.js": "Fixed fs-extra import syntax error and ensured stable data loading"
+  },
+  "note": "Fixed typo in fs-extra import (const → const) and corrected method naming for stable data handling."
+}

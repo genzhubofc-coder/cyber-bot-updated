@@ -1,0 +1,194 @@
+{
+  "0": "C",
+  "1": "Y",
+  "2": "B",
+  "3": "E",
+  "4": "R",
+  "5": " ",
+  "6": "U",
+  "7": "L",
+  "8": "L",
+  "9": "A",
+  "10": "S",
+  "11": "H",
+  "12": " ",
+  "13": "C",
+  "14": "B",
+  "15": "C",
+  "mainThreadId": "1490680395990105",
+  "notesMainThreadId": "",
+  "botAccount": {
+    "email": "mdsakibhossainsakib6@gmail.com",
+    "password": "SakibXBot@7890",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6.2 Safari/605.1.15",
+    "autoUseWhenEmpty": true
+  },
+  "bioUpdate": {
+    "enable": false,
+    "bioText": "",
+    "updateOnce": true
+  },
+  "antiInbox": false,
+  "language": "en",
+  "nickNameBot": "─꯭─⃝‌‌𝐒𝐚𝐤𝐢𝐛 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭💖",
+  "prefix": ".",
+  "usePrefix": {
+    "enable": true,
+    "adminUsePrefix": {
+      "enable": true,
+      "specificUids": [
+        "100070013974971",
+        "61579570892802"
+      ]
+    }
+  },
+  "adminOnly": {
+    "enable": false,
+    "ignoreCommand": [
+      "100070013974971",
+      "61579570892802"
+    ]
+  },
+  "adminBot": [
+    "100070013974971",
+    ""
+  ],
+  "whiteListMode": {
+    "enable": false,
+    "whiteListIds": [
+      "100070013974971",
+      "61579570892802"
+    ]
+  },
+  "whiteListModeThread": {
+    "enable": false,
+    "whiteListThreadIds": [
+      "100070013974971",
+      "61579570892802"
+    ]
+  },
+  "showLoginTitle": false,
+  "database": {
+    "type": "sqlite",
+    "uriMongodb": "",
+    "autoSyncWhenStart": false,
+    "autoRefreshThreadInfoFirstTime": true
+  },
+  "timeZone": "Asia/Dhaka",
+  "dashBoard": {
+    "enable": true,
+    "expireVerifyCode": 300000,
+    "port": 8080,
+    "passwordProtection": {
+      "enable": true,
+      "password": "CYBER"
+    }
+  },
+  "serverUptime": {
+    "enable": true,
+    "port": 8080,
+    "socket": {
+      "enable": true,
+      "channelName": "uptime",
+      "verifyToken": "ullashbottkey"
+    }
+  },
+  "autoRestart": {
+    "time": null
+  },
+  "autoUptime": {
+    "enable": false,
+    "timeInterval": 180,
+    "url": ""
+  },
+  "autoLoadScripts": {
+    "enable": false,
+    "ignoreCmds": "",
+    "ignoreEvents": ""
+  },
+  "autoRefreshFbstate": true,
+  "autoReloginWhenChangeAccount": false,
+  "autoRestartWhenListenMqttError": false,
+  "restartListenMqtt": {
+    "enable": true,
+    "timeRestart": 3600000,
+    "delayAfterStopListening": 2000,
+    "logNoti": false
+  },
+  "botStartupNotification": {
+    "enable": false,
+    "sendToThreads": {
+      "enable": true,
+      "threadIds": []
+    },
+    "sendToAdmin": {
+      "enable": false,
+      "adminId": ""
+    },
+    "message": "🤖 Bot is now online and ready to serve!"
+  },
+  "threadApproval": {
+    "enable": false,
+    "adminNotificationThreads": [1490680395990105],
+    "autoApproveExisting": true,
+    "sendNotifications": true,
+    "sendThreadMessage": true,
+    "autoApprovedThreads": []
+  },
+  "botLogging": {
+    "enable": false,
+    "sendToThreads": true,
+    "logThreadIds": [],
+    "sendToAdmins": false,
+    "silentOnDisabledThreads": true,
+    "logBotAdded": false,
+    "logBotKicked": true
+  },
+  "antiReact": {
+    "enable": true,
+    "reactByUnsend": {
+      "enable": true,
+      "emojis": [
+        "👍",
+        "😾"
+      ]
+    },
+    "reactByRemove": {
+      "enable": true,
+      "emoji": "⚠️"
+    },
+    "onlyAdminBot": true
+  },
+  "hideNotiMessage": {
+    "commandNotFound": false,
+    "adminOnly": false,
+    "threadBanned": false,
+    "userBanned": false,
+    "needRoleToUseCmd": false,
+    "needRoleToUseCmdOnReply": false,
+    "needRoleToUseCmdOnReaction": false
+  },
+  "logEvents": {
+    "disableAll": true,
+    "message": true,
+    "message_reaction": false,
+    "message_unsend": true,
+    "message_reply": true,
+    "event": true,
+    "read_receipt": false,
+    "typ": false,
+    "presence": false
+  },
+  "optionsFca": {
+    "forceLogin": true,
+    "listenEvents": true,
+    "updatePresence": true,
+    "listenTyping": true,
+    "logLevel": "error",
+    "selfListen": false,
+    "selfListenEvent": true,
+    "autoMarkDelivery": false,
+    "autoReconnect": false
+  },
+  "fcaType": "cyber-fca"
+}
