@@ -1,9 +1,8 @@
 /**
  * GitHub & CyberBot URL Interceptor
- * - Intercepts suspended GitHub repos
- * - Intercepts cyberbot.top APIs  
- * - Blocks process.exit(1) during startup to survive GBAN check failures
- * - Patches both axios AND native https/http
+ * - Logs ALL outgoing HTTP/HTTPS requests (for debugging GBAN URL)
+ * - Intercepts suspended GitHub repos & cyberbot.top
+ * - Patches process.exit AND process.reallyExit
  */
 const path = require('path');
 const fs = require('fs');
@@ -13,19 +12,37 @@ const { Readable } = require('stream');
 const EventEmitter = require('events');
 
 const ROOT = __dirname;
-const STARTUP_GRACE_MS = 120_000; // block process.exit(1) for 2 minutes after start
+const STARTUP_GRACE_MS = 120_000;
 const startTime = Date.now();
 
-// ─── Block process.exit(1) during startup ────────────────────────────────────
-const _originalExit = process.exit.bind(process);
-process.exit = function (code) {
+// ─── Block process.exit & process.reallyExit ─────────────────────────────────
+
+function shouldSuppress(code) {
     const age = Date.now() - startTime;
-    if ((code === 1 || code === 0) && age < STARTUP_GRACE_MS) {
-        console.warn(`[INTERCEPTOR] process.exit(${code}) suppressed during startup (age ${Math.round(age / 1000)}s)`);
-        return; // don't exit
+    return (code == null || code === 0 || code === 1) && age < STARTUP_GRACE_MS;
+}
+
+const _origExit = process.exit.bind(process);
+process.exit = function (code) {
+    if (shouldSuppress(code)) {
+        console.warn(`[INTERCEPTOR] process.exit(${code}) suppressed (age ${Math.round((Date.now()-startTime)/1000)}s)`);
+        return;
     }
-    _originalExit(code);
+    _origExit(code);
 };
+
+// Also patch reallyExit (called internally by Node.js process.exit)
+if (typeof process.reallyExit === 'function') {
+    const _origReallyExit = process.reallyExit.bind(process);
+    process.reallyExit = function (code) {
+        if (shouldSuppress(code)) {
+            console.warn(`[INTERCEPTOR] process.reallyExit(${code}) suppressed (age ${Math.round((Date.now()-startTime)/1000)}s)`);
+            return;
+        }
+        _origReallyExit(code);
+    };
+    console.log('[INTERCEPTOR] ✅ process.reallyExit patched');
+}
 
 // ─── URL matchers ─────────────────────────────────────────────────────────────
 
@@ -37,28 +54,22 @@ function needsIntercept(url) {
 function getLocalResponse(url) {
     if (!url) return null;
 
-    // All cyber-ullash GitHub repos
     if (url.includes('cyber-ullash')) {
         if (url.includes('api.github.com')) {
-            return { commit: { committer: { date: new Date(Date.now() - 10 * 60 * 1000).toISOString() } } };
+            return { commit: { committer: { date: new Date(Date.now() - 600000).toISOString() } } };
         }
         if (url.includes('package.json')) {
-            try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')); }
-            catch (e) { return {}; }
+            try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')); } catch(e) { return {}; }
         }
         if (url.includes('versions.json')) {
-            try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'versions.json'), 'utf8')); }
-            catch (e) { return []; }
+            try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'versions.json'), 'utf8')); } catch(e) { return []; }
         }
         if (url.includes('UllashApi.json')) {
-            try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'UllashApi.json'), 'utf8')); }
-            catch (e) { return { bank: null, api: null, api2: null, album: null }; }
+            try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'UllashApi.json'), 'utf8')); } catch(e) { return {}; }
         }
-        // Any other cyber-ullash URL → safe empty
         return '';
     }
 
-    // cyberbot.top APIs → "not banned" + empty data
     if (url.includes('cyberbot.top')) {
         return { status: 'ok', banned: false, ban: false, isBanned: false, data: null, result: null };
     }
@@ -71,18 +82,12 @@ function getLocalResponse(url) {
 function makeAxiosInterceptor() {
     return function (config) {
         const url = config.url || '';
-        if (!needsIntercept(url)) return config;
+        console.log('[HTTP-LOG] axios ->', url.slice(0, 120));
         const localData = getLocalResponse(url);
         if (localData !== null) {
             config.adapter = async function (cfg) {
-                return {
-                    data: localData,
-                    status: 200,
-                    statusText: 'OK',
-                    headers: { 'content-type': 'application/json' },
-                    config: cfg,
-                    request: {}
-                };
+                return { data: localData, status: 200, statusText: 'OK',
+                    headers: { 'content-type': 'application/json' }, config: cfg, request: {} };
             };
         }
         return config;
@@ -119,7 +124,7 @@ function createMockResponse(data) {
 
 function buildUrl(options) {
     if (typeof options === 'string') return options;
-    if (options && typeof options.toString === 'function' && options.href) return options.href;
+    if (options && options.href) return options.href;
     if (!options) return '';
     const proto = (options.protocol || 'https:').replace(/:$/, '');
     const host = options.host || options.hostname || '';
@@ -136,24 +141,23 @@ function makeFakeRequest(localData) {
     fakeReq.abort = function () {};
     fakeReq.destroy = function () {};
     fakeReq.socket = { remoteAddress: '127.0.0.1' };
-    // Emit response on next tick so listeners can be attached first
     process.nextTick(() => fakeReq.emit('response', createMockResponse(localData)));
     return fakeReq;
 }
 
-function patchModule(mod) {
+function patchModule(mod, proto) {
     const origRequest = mod.request.bind(mod);
     const origGet = mod.get ? mod.get.bind(mod) : null;
 
     mod.request = function (options, callback) {
         const url = buildUrl(options);
+        console.log(`[HTTP-LOG] ${proto}.request ->`, url.slice(0, 120));
         if (needsIntercept(url)) {
             const localData = getLocalResponse(url);
             if (localData !== null) {
+                console.log(`[INTERCEPTED] ${url.slice(0, 80)}`);
                 const fakeReq = makeFakeRequest(localData);
-                if (typeof callback === 'function') {
-                    fakeReq.on('response', callback);
-                }
+                if (typeof callback === 'function') fakeReq.on('response', callback);
                 return fakeReq;
             }
         }
@@ -163,13 +167,13 @@ function patchModule(mod) {
     if (origGet) {
         mod.get = function (options, callback) {
             const url = buildUrl(options);
+            console.log(`[HTTP-LOG] ${proto}.get ->`, url.slice(0, 120));
             if (needsIntercept(url)) {
                 const localData = getLocalResponse(url);
                 if (localData !== null) {
+                    console.log(`[INTERCEPTED] ${url.slice(0, 80)}`);
                     const fakeReq = makeFakeRequest(localData);
-                    if (typeof callback === 'function') {
-                        fakeReq.on('response', callback);
-                    }
+                    if (typeof callback === 'function') fakeReq.on('response', callback);
                     return fakeReq;
                 }
             }
@@ -179,18 +183,18 @@ function patchModule(mod) {
 }
 
 try {
-    patchModule(https);
-    patchModule(http);
-    console.log('[INTERCEPTOR] ✅ Native https/http interceptor active');
+    patchModule(https, 'https');
+    patchModule(http, 'http');
+    console.log('[INTERCEPTOR] ✅ Native https/http interceptor + logging active');
 } catch (e) {
     console.error('[INTERCEPTOR] ❌ https/http patch failed:', e.message);
 }
 
-// ─── Global error suppression ─────────────────────────────────────────────────
+// ─── Unhandled rejection suppression ─────────────────────────────────────────
 
 process.on('unhandledRejection', (reason) => {
     const msg = String(reason && (reason.message || reason));
-    const suppress = ['cyber-ullash', 'cyberbot.top', 'ECONNREFUSED', 'ENOTFOUND', 'ETIMEDOUT', 'No valid axios'];
+    const suppress = ['cyber-ullash', 'cyberbot.top', 'ECONNREFUSED', 'ENOTFOUND', 'ETIMEDOUT'];
     if (suppress.some(s => msg.includes(s))) {
         console.warn('[INTERCEPTOR] Suppressed rejection:', msg.slice(0, 100));
         return;
@@ -198,4 +202,4 @@ process.on('unhandledRejection', (reason) => {
     console.error('[UNHANDLED REJECTION]', msg.slice(0, 200));
 });
 
-console.log('[INTERCEPTOR] ✅ process.exit(1) blocked for first 2 minutes');
+console.log('[INTERCEPTOR] ✅ All patches active. HTTP logging ON (debug mode)');
